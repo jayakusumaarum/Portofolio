@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT Jaya Kusuma Arum — Outsourcing Keamanan, Cleaning Service & Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        /* ══ PALET WARNA — selaras logo ══ */
+        --maroon:      #7A1E2B;
+        --maroon-dark: #5A1420;
+        --maroon-deep: #380B14;
+        --gold:        #C9A227;
+        --gold-light:  #E8C766;
+        --cream:       #FAF6EE;
+        --ivory:       #FFFDF8;
+        --text:        #362A2E;
+        --gray:        #8a7d80;
+        --green:       #34C759;   /* status aktif ala iOS */
+        --hairline:    rgba(56,11,20,0.08); /* garis pemisah tipis ala iOS */
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--ivory);
+        color: var(--text);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .logo-text { font-family: 'Playfair Display', Georgia, serif; }
+    ::selection { background: var(--gold); color: var(--maroon-deep); }
+
+    /* ═══════════════════════════════════════════
+       HEADER — iOS Frosted Glass
+       ═══════════════════════════════════════════ */
+    .header {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        background: rgba(255, 253, 248, 0.72);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
+        padding: 0.65rem 4%;
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 1px solid var(--hairline);
+        transition: box-shadow 0.35s ease;
+    }
+    .header.scrolled { box-shadow: 0 8px 30px rgba(56, 11, 20, 0.10); }
+
+    /* Logo chip — seperti app icon iOS */
+    .logo-container { display: flex; align-items: center; gap: 13px; }
+    .logo-chip {
+        width: 52px; height: 52px; flex-shrink: 0;
+        background: linear-gradient(160deg, #ffffff, #fdfaf3);
+        border-radius: 15px;
+        padding: 6px;
+        box-shadow:
+            0 2px 6px rgba(56,11,20,0.10),
+            0 8px 20px rgba(56,11,20,0.08),
+            inset 0 0 0 1px rgba(201,162,39,0.28);
+        display: flex; align-items: center; justify-content: center;
+        transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .logo-chip:hover { transform: scale(1.06) rotate(-2deg); }
+    .logo-chip img { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; }
+
+    .logo-text { color: var(--maroon); font-size: 1.12rem; font-weight: 700; line-height: 1.25; }
+    .logo-text span {
+        display: block; font-family: 'Inter', sans-serif;
+        color: var(--gold); font-size: 0.62rem; font-weight: 600;
+        letter-spacing: 2.8px; text-transform: uppercase;
+    }
+
+    .nav-menu { display: flex; list-style: none; gap: 1.8rem; align-items: center; }
+    .nav-menu a {
+        color: var(--text); text-decoration: none; font-weight: 500;
+        font-size: 0.92rem; position: relative; transition: color 0.3s;
+    }
+    .nav-menu a::after {
+        content: ''; position: absolute; bottom: -6px; left: 50%;
+        transform: translateX(-50%);
+        width: 0; height: 3px; border-radius: 3px;
+        background: var(--gold); transition: width 0.3s;
+    }
+    .nav-menu a:hover { color: var(--maroon); }
+    .nav-menu a:hover::after { width: 60%; }
+
+    .btn-nav {
+        background: var(--maroon) !important; color: var(--ivory) !important;
+        padding: 0.55rem 1.4rem !important; border-radius: 50px;
+        font-weight: 600 !important; font-size: 0.88rem !important;
+        box-shadow: 0 4px 14px rgba(122,30,43,0.35) !important;
+        transition: all 0.3s !important;
+    }
+    .btn-nav::after { display: none !important; }
+    .btn-nav:hover {
+        background: var(--gold) !important; color: var(--maroon-deep) !important;
+        transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201,162,39,0.4) !important;
+    }
+
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 8px; }
+    .hamburger span { width: 24px; height: 2.5px; border-radius: 3px; background: var(--maroon); }
+
+    /* ═══════════════════════════════════════════
+       HERO — background CSS murni
+       ═══════════════════════════════════════════ */
+    .hero {
+        min-height: 100vh; position: relative; overflow: hidden;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 3rem; padding: 130px 5% 120px;
+        background:
+            radial-gradient(ellipse 55% 55% at 12% 35%, rgba(201,162,39,0.14), transparent),
+            radial-gradient(ellipse 45% 60% at 90% 10%, rgba(232,199,102,0.08), transparent),
+            linear-gradient(140deg, var(--maroon-deep) 0%, var(--maroon-dark) 45%, var(--maroon) 100%);
+    }
+    .hero::after {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1.6px);
+        background-size: 26px 26px;
+    }
+    .hero-ring {
+        position: absolute; border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.18); pointer-events: none;
+    }
+    .hero-ring.r1 { width: 620px; height: 620px; top: -220px; right: -160px; }
+    .hero-ring.r2 { width: 420px; height: 420px; bottom: -180px; left: -140px; border-style: dashed; }
+    .hero-glow {
+        position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none;
+        background: rgba(201,162,39,0.22);
+    }
+    .hero-glow.g1 { width: 300px; height: 300px; top: 15%; right: 20%; }
+    .hero-glow.g2 { width: 220px; height: 220px; bottom: 10%; left: 8%; background: rgba(122,30,43,0.5); }
+
+    .hero-content { max-width: 620px; position: relative; z-index: 3; animation: fadeUp 1s ease; }
+
+    .hero-tag {
+        display: inline-flex; align-items: center; gap: 8px;
+        border: 1px solid rgba(201,162,39,0.5); color: var(--gold-light);
+        background: rgba(255,253,248,0.06);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        padding: 0.5rem 1.3rem; border-radius: 50px;
+        font-size: 0.78rem; font-weight: 600; letter-spacing: 1.5px;
+        text-transform: uppercase; margin-bottom: 1.6rem;
+    }
+
+    .hero h1 { color: var(--ivory); font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.18; margin-bottom: 1.3rem; }
+    .hero h1 span {
+        background: linear-gradient(90deg, var(--gold-light), var(--gold));
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent; font-style: italic;
+    }
+    .hero p { color: rgba(255,253,248,0.82); font-size: 1.06rem; margin-bottom: 2.4rem; max-width: 540px; }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+        padding: 0.95rem 2.1rem; border-radius: 50px; text-decoration: none;
+        font-weight: 600; font-size: 0.96rem; transition: all 0.3s cubic-bezier(.25,.8,.35,1);
+        display: inline-block;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        color: var(--maroon-deep);
+        box-shadow: 0 8px 25px rgba(201,162,39,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 35px rgba(201,162,39,0.45); }
+    .btn-glass {
+        border: 1.5px solid rgba(255,253,248,0.35); color: var(--ivory);
+        background: rgba(255,253,248,0.06);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+    .btn-glass:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-3px); }
+
+    /* Emblem logo — kaca iOS */
+    .hero-emblem { position: relative; z-index: 3; animation: fadeUp 1.2s ease; }
+    .emblem-ring {
+        width: min(350px, 38vw); aspect-ratio: 1; border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.55);
+        display: flex; align-items: center; justify-content: center;
+        position: relative; padding: 26px;
+    }
+    .emblem-ring::before {
+        content: ''; position: absolute; inset: 11px; border-radius: 50%;
+        border: 1px dashed rgba(201,162,39,0.4);
+        animation: spin 50s linear infinite;
+    }
+    .emblem-disc {
+        width: 100%; height: 100%; border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #fffefb, var(--cream));
+        display: flex; align-items: center; justify-content: center;
+        padding: 15%;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(201,162,39,0.25);
+    }
+    .emblem-disc img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .emblem-badge {
+        position: absolute; bottom: 6%; right: -4%;
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        color: var(--maroon-deep); padding: 0.85rem 1.3rem; border-radius: 16px;
+        font-weight: 700; font-size: 1.1rem; text-align: center;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.35); line-height: 1.25;
+    }
+    .emblem-badge small { display: block; font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ═══════════════════════════════════════════
+       STATS — kartu kaca mengambang ala iOS
+       ═══════════════════════════════════════════ */
+    .stats-wrap { max-width: 1150px; margin: -65px auto 0; padding: 0 5%; position: relative; z-index: 10; }
+    .stats-bar {
+        background: rgba(255,253,248,0.85);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        backdrop-filter: blur(20px) saturate(160%);
+        border-radius: 24px;
+        border: 1px solid rgba(255,255,255,0.7);
+        box-shadow:
+            0 22px 55px rgba(56, 11, 20, 0.20),
+            inset 0 1px 0 rgba(255,255,255,0.9);
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        padding: 2.2rem 2.5rem; gap: 1rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800; color: var(--maroon); }
+    .stat-label { color: var(--gray); font-size: 0.84rem; margin-top: 0.2rem; }
+
+    /* ═══════════ SECTION UMUM ═══════════ */
+    .section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+    .section-tag { color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; font-size: 0.76rem; margin-bottom: 0.7rem; }
+    .section-title { font-size: clamp(1.7rem, 3.4vw, 2.4rem); color: var(--maroon); margin-bottom: 0.6rem; }
+    .section-desc { color: var(--gray); max-width: 640px; margin: 0 auto 0.8rem; }
+    .center { text-align: center; }
+
+    .ornament { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0.4rem auto 3rem; }
+    .ornament span { height: 1px; width: 62px; }
+    .ornament span:first-child { background: linear-gradient(90deg, transparent, var(--gold)); }
+    .ornament span:last-child  { background: linear-gradient(90deg, var(--gold), transparent); }
+    .ornament i { color: var(--gold); font-style: normal; font-size: 0.65rem; }
+
+    /* ═══════════════════════════════════════════
+       TENTANG
+       ═══════════════════════════════════════════ */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center; }
+
+    .main-card {
+        background: linear-gradient(145deg, var(--maroon-deep), var(--maroon));
+        border-radius: 28px; padding: 3rem 2.5rem; text-align: center;
+        box-shadow: 0 25px 60px rgba(56, 11, 20, 0.3);
+        border: 1px solid rgba(201,162,39,0.3);
+        position: relative; overflow: hidden;
+    }
+    .main-card::before {
+        content: ''; position: absolute; inset: 12px; border-radius: 20px;
+        border: 1px solid rgba(201,162,39,0.25); pointer-events: none;
+    }
+    .main-card .logo-round {
+        background: linear-gradient(160deg, #ffffff, var(--cream));
+        border-radius: 50%;
+        width: 190px; height: 190px; margin: 0 auto 1.6rem;
+        display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(201,162,39,0.2);
+    }
+    .main-card .logo-round img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .main-card h3 { color: var(--ivory); font-size: 1.45rem; }
+    .main-card p { color: var(--gold-light); letter-spacing: 3px; font-size: 0.72rem; text-transform: uppercase; margin-top: 0.4rem; }
+
+    .about-badge {
+        display: inline-block; margin-top: 1.4rem;
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        color: var(--maroon-deep); padding: 1rem 1.6rem; border-radius: 18px;
+        font-weight: 800; font-size: 1.3rem; line-height: 1.2;
+        box-shadow: 0 14px 35px rgba(201,162,39,0.45);
+    }
+    .about-badge small { display: block; font-size: 0.68rem; font-weight: 600; }
+
+    .about-content p { color: var(--gray); margin-bottom: 1.4rem; }
+    .about-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .about-list li { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.92rem; }
+    .check-icon {
+        width: 24px; height: 24px; flex-shrink: 0;
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        color: var(--maroon-deep); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.72rem; font-weight: 800;
+    }
+
+    /* ═══════════════════════════════════════════
+       ★ BARU: LEGALITAS — gaya iOS Settings ★
+       ═══════════════════════════════════════════ */
+    .legal-section {
+        background-color: var(--cream);
+        background-image: radial-gradient(rgba(122,30,43,0.045) 1px, transparent 1.4px);
+        background-size: 22px 22px;
+    }
+    .legal-grid {
+        display: grid; grid-template-columns: 0.9fr 1.1fr;
+        gap: 3rem; align-items: start;
+    }
+
+    /* Kartu identitas — seperti kartu profil iOS */
+    .legal-card {
+        background: linear-gradient(150deg, var(--maroon-deep), var(--maroon));
+        border-radius: 26px; padding: 2.6rem 2.2rem;
+        color: var(--ivory); text-align: center;
+        box-shadow: 0 25px 55px rgba(56,11,20,0.32);
+        border: 1px solid rgba(201,162,39,0.3);
+        position: relative; overflow: hidden; position: sticky; top: 100px;
+    }
+    .legal-card::before {
+        content: ''; position: absolute; top: -60px; right: -60px;
+        width: 200px; height: 200px; border-radius: 50%;
+        background: rgba(201,162,39,0.12); filter: blur(40px);
+    }
+    .legal-card .legal-logo {
+        width: 110px; height: 110px; margin: 0 auto 1.4rem;
+        background: linear-gradient(160deg, #ffffff, var(--cream));
+        border-radius: 28px; padding: 12px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(201,162,39,0.2);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .legal-card .legal-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 18px; }
+    .legal-card h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .legal-card .legal-sub {
+        color: var(--gold-light); font-size: 0.72rem; font-weight: 600;
+        letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 1.6rem;
+    }
+    .status-pill {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(52, 199, 89, 0.14);
+        border: 1px solid rgba(52, 199, 89, 0.45);
+        color: #6ee795; padding: 0.5rem 1.3rem; border-radius: 50px;
+        font-size: 0.82rem; font-weight: 600;
+        -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .status-dot {
+        width: 9px; height: 9px; border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 0 rgba(52,199,89,0.5);
+        animation: pulseDot 2s infinite;
+    }
+    .legal-card .biz-number {
+        margin-top: 1.6rem; padding-top: 1.4rem;
+        border-top: 1px solid rgba(255,253,248,0.15);
+    }
+    .legal-card .biz-number small {
+        display: block; color: rgba(255,253,248,0.55);
+        font-size: 0.68rem; font-weight: 600; letter-spacing: 2px;
+        text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .legal-card .biz-number strong {
+        font-size: 1.7rem; font-weight: 700; letter-spacing: 4px;
+        color: var(--gold-light); font-variant-numeric: tabular-nums;
+    }
+
+    /* Daftar detail — persis gaya iOS Settings grouped list */
+    .ios-list {
+        background: var(--ivory);
+        border-radius: 22px; overflow: hidden;
+        box-shadow:
+            0 8px 30px rgba(56,11,20,0.10),
+            inset 0 0 0 1px var(--hairline);
+    }
+    .ios-row {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 1.2rem; padding: 1.15rem 1.5rem;
+        border-bottom: 0.5px solid var(--hairline);
+        transition: background 0.2s;
+    }
+    .ios-row:last-child { border-bottom: none; }
+    .ios-row:hover { background: rgba(250,246,238,0.9); }
+
+    .ios-label {
+        display: flex; align-items: center; gap: 12px;
+        font-size: 0.9rem; font-weight: 500; color: var(--text);
+        min-width: 150px;
+    }
+    .ios-icon {
+        width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.95rem;
+        background: linear-gradient(160deg, rgba(201,162,39,0.15), rgba(122,30,43,0.08));
+        box-shadow: inset 0 0 0 1px rgba(201,162,39,0.25);
+    }
+    .ios-value {
+        text-align: right; font-size: 0.92rem; color: var(--gray); font-weight: 500;
+    }
+    .ios-value.strong { color: var(--maroon); font-weight: 700; }
+
+    .ios-note {
+        display: flex; gap: 10px; align-items: flex-start;
+        margin-top: 1.1rem; padding: 0.9rem 1.2rem;
+        background: rgba(201,162,39,0.08);
+        border: 1px solid rgba(201,162,39,0.25);
+        border-radius: 14px;
+        font-size: 0.8rem; color: var(--gray); line-height: 1.5;
+    }
+    .ios-note i { color: var(--gold); font-style: normal; }
+
+    .status-badge-inline {
+        display: inline-flex; align-items: center; gap: 7px;
+        background: rgba(52,199,89,0.12); color: #1f9d4d;
+        padding: 0.3rem 0.85rem; border-radius: 50px;
+        font-size: 0.8rem; font-weight: 600;
+    }
+
+    /* ═══════════ LAYANAN ═══════════ */
+    .services-section {
+        background-color: var(--ivory);
+    }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+    .service-card {
+        background: var(--cream); border-radius: 24px; padding: 2.4rem 2rem;
+        border: 1px solid rgba(201,162,39,0.18);
+        box-shadow: 0 6px 25px rgba(56, 11, 20, 0.06);
+        transition: all 0.35s cubic-bezier(.25,.8,.35,1);
+    }
+    .service-card:hover {
+        transform: translateY(-10px) scale(1.015);
+        box-shadow: 0 25px 50px rgba(56, 11, 20, 0.16);
+        background: var(--ivory);
+    }
+    .service-icon {
+        width: 64px; height: 64px; border-radius: 18px; font-size: 1.8rem;
+        display: flex; align-items: center; justify-content: center; margin-bottom: 1.4rem;
+        background: linear-gradient(160deg, rgba(201,162,39,0.16), rgba(122,30,43,0.08));
+        box-shadow: inset 0 0 0 1px rgba(201,162,39,0.3);
+    }
+    .service-card h3 { color: var(--maroon); font-size: 1.26rem; margin-bottom: 0.9rem; }
+    .service-card > p { color: var(--gray); font-size: 0.92rem; margin-bottom: 1.4rem; }
+    .service-list { list-style: none; }
+    .service-list li {
+        font-size: 0.88rem; padding: 0.42rem 0;
+        border-bottom: 1px dashed rgba(201,162,39,0.35);
+        display: flex; gap: 9px;
+    }
+    .service-list li::before { content: '✦'; color: var(--gold); font-size: 0.75rem; padding-top: 2px; }
+
+    /* ═══════════ KEUNGGULAN ═══════════ */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .why-item {
+        text-align: center; padding: 2.2rem 1.5rem; border-radius: 20px;
+        border: 1px solid transparent; transition: 0.3s;
+    }
+    .why-item:hover { background: var(--cream); border-color: rgba(201,162,39,0.3); }
+    .why-number { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800; color: rgba(122,30,43,0.12); line-height: 1; }
+    .why-item h3 { color: var(--maroon); margin: 0.5rem 0 0.7rem; font-size: 1.1rem; }
+    .why-item p { color: var(--gray); font-size: 0.88rem; }
+
+    /* ═══════════ INDUSTRI ═══════════ */
+    .industries {
+        position: relative; overflow: hidden;
+        background:
+            radial-gradient(ellipse 50% 60% at 85% 20%, rgba(201,162,39,0.12), transparent),
+            linear-gradient(140deg, var(--maroon-deep), var(--maroon-dark));
+    }
+    .industries::after {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.5px);
+        background-size: 24px 24px;
+    }
+    .industries .inner { position: relative; z-index: 2; text-align: center; padding: 5rem 5%; max-width: 1000px; margin: 0 auto; }
+    .industries .section-title, .industries .section-desc { color: var(--ivory); }
+    .industry-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; }
+    .industry-tag {
+        background: rgba(255,253,248,0.06); border: 1px solid rgba(201,162,39,0.4);
+        color: var(--ivory); padding: 0.75rem 1.7rem; border-radius: 50px;
+        font-size: 0.92rem; transition: 0.3s;
+        -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .industry-tag:hover {
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        color: var(--maroon-deep); font-weight: 600; transform: translateY(-3px);
+    }
+
+    /* ═══════════ KONTAK ═══════════ */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-info-item { display: flex; gap: 1.1rem; margin-bottom: 1.8rem; align-items: flex-start; }
+    .contact-icon {
+        width: 48px; height: 48px; flex-shrink: 0; border-radius: 14px; font-size: 1.2rem;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--ivory); box-shadow: inset 0 0 0 1px rgba(201,162,39,0.35);
+    }
+    .contact-info-item h4 { color: var(--maroon); margin-bottom: 0.25rem; font-size: 1rem; }
+    .contact-info-item p { color: var(--gray); font-size: 0.92rem; }
+
+    .contact-form {
+        background: var(--ivory); border-radius: 24px; padding: 2.5rem;
+        box-shadow: 0 18px 50px rgba(56, 11, 20, 0.12), inset 0 0 0 1px rgba(201,162,39,0.2);
+    }
+    .contact-form h3 { color: var(--maroon); margin-bottom: 1.4rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; color: var(--maroon); font-weight: 600; font-size: 0.85rem; margin-bottom: 0.45rem; }
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%; padding: 0.85rem 1.05rem; font-size: 0.94rem; font-family: inherit;
+        border: 1.5px solid rgba(201,162,39,0.3); border-radius: 13px;
+        background: var(--cream); transition: 0.3s; color: var(--text);
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        outline: none; border-color: var(--maroon); background: #fff;
+        box-shadow: 0 0 0 4px rgba(122,30,43,0.08);
+    }
+    .btn-submit {
+        width: 100%; background: var(--maroon); color: var(--ivory); border: none;
+        padding: 1rem; border-radius: 13px; font-size: 1rem; font-weight: 600;
+        cursor: pointer; font-family: inherit; transition: 0.3s;
+        box-shadow: 0 6px 18px rgba(122,30,43,0.35);
+    }
+    .btn-submit:hover { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--maroon-deep); transform: translateY(-2px); }
+
+    /* ═══════════ FOOTER ═══════════ */
+    .footer { background: var(--maroon-deep); color: rgba(255,253,248,0.65); padding: 4rem 5% 1.5rem; position: relative; }
+    .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
+    .footer-logo-chip {
+        display: inline-flex; background: linear-gradient(160deg, #ffffff, var(--cream));
+        border-radius: 18px; padding: 9px 14px; margin-bottom: 1rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(201,162,39,0.3);
+    }
+    .footer-logo-chip img { height: 46px; display: block; }
+    .footer-brand h3 { color: var(--ivory); margin-bottom: 0.7rem; }
+    .footer-brand p { font-size: 0.88rem; max-width: 380px; }
+    .footer h4 { color: var(--gold-light); margin-bottom: 1.1rem; font-size: 0.95rem; letter-spacing: 1px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.65rem; }
+    .footer-links a { color: rgba(255,253,248,0.65); text-decoration: none; font-size: 0.88rem; transition: 0.3s; }
+    .footer-links a:hover { color: var(--gold-light); padding-left: 5px; }
+    .footer-bottom { border-top: 1px solid rgba(255,253,248,0.12); text-align: center; padding-top: 1.5rem; font-size: 0.83rem; max-width: 1200px; margin: 0 auto; }
+    .footer-bottom span { color: var(--gold-light); }
+
+    /* ═══════════ WHATSAPP ═══════════ */
+    .wa-float {
+        position: fixed; bottom: 25px; right: 25px; width: 58px; height: 58px;
+        background: #25d366; border-radius: 50%; z-index: 999;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 25px rgba(37,211,102,0.45);
+        animation: pulse 2s infinite; transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .wa-float:hover { transform: scale(1.12); }
+
+    /* ═══════════ ANIMASI ═══════════ */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulseDot {
+        0%   { box-shadow: 0 0 0 0 rgba(52,199,89,0.5); }
+        70%  { box-shadow: 0 0 0 8px rgba(52,199,89,0); }
+        100% { box-shadow: 0 0 0 0 rgba(52,199,89,0); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 968px) {
+        .hamburger { display: flex; }
+        .nav-menu {
+            position: fixed; top: 66px; left: -100%; width: 100%;
+            background: rgba(255,253,248,0.96);
+            -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+            flex-direction: column; padding: 2rem 5%; gap: 1.4rem;
+            transition: 0.4s; border-bottom: 3px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(56,11,20,0.15);
+        }
+        .nav-menu.active { left: 0; }
+        .hero { flex-direction: column; text-align: center; padding-top: 110px; }
+        .hero p { margin-left: auto; margin-right: auto; }
+        .hero-buttons { justify-content: center; }
+        .hero-emblem { margin-top: 1rem; }
+        .about-grid, .contact-grid, .legal-grid { grid-template-columns: 1fr; gap: 3rem; }
+        .legal-card { position: static; }
+        .services-grid { grid-template-columns: 1fr; }
+        .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 1.8rem 1.5rem; }
+        .footer-grid { grid-template-columns: 1fr; }
+        .ios-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+        .ios-value { text-align: left; }
+    }
+    @media (max-width: 480px) {
+        .logo-text { font-size: 0.95rem; }
+        .logo-chip { width: 44px; height: 44px; }
+        .emblem-ring { width: 250px; }
+        .hero h1 { font-size: 1.9rem; }
+    }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="header" id="header">
+    <div class="logo-container">
+        <div class="logo-chip">
+            <img src="https://z-cdn-media.chatglm.cn/files/01c5aad9-d544-461a-850b-5c3368e39099.png?auth_key=1890297576-9557db4ae989468cb3aebe9668febea6-0-a837e2a1098b95caadeeb7864beb7e36" alt="Logo PT Jaya Kusuma Arum">
+        </div>
+        <div class="logo-text">
+            Jaya Kusuma Arum
+            <span>Outsourcing Services</span>
+        </div>
+    </div>
+    <nav>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#legalitas">Legalitas</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#kontak" class="btn-nav">Hubungi Kami</a></li>
+        </ul>
+    </nav>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="beranda">
+    <div class="hero-ring r1"></div>
+    <div class="hero-ring r2"></div>
+    <div class="hero-glow g1"></div>
+    <div class="hero-glow g2"></div>
+
+    <div class="hero-content">
+        <div class="hero-tag">✦ Solusi SDM Profesional untuk Perusahaan Anda</div>
+        <h1>Mitra Terpercaya <span>Outsourcing</span> Keamanan, Kebersihan &amp; Administrasi</h1>
+        <p>PT Jaya Kusuma Arum menyediakan tenaga kerja profesional yang terlatih, bersertifikat, dan siap mendukung operasional bisnis Anda — dari keamanan, cleaning service, hingga staf administrasi.</p>
+        <div class="hero-buttons">
+            <a href="#layanan" class="btn btn-primary">Lihat Layanan Kami</a>
+            <a href="#kontak" class="btn btn-glass">Konsultasi Gratis</a>
+        </div>
+    </div>
+
+    <div class="hero-emblem">
+        <div class="emblem-ring">
+            <div class="emblem-disc">
+                <img src="https://z-cdn-media.chatglm.cn/files/01c5aad9-d544-461a-850b-5c3368e39099.png?auth_key=1890297576-9557db4ae989468cb3aebe9668febea6-0-a837e2a1098b95caadeeb7864beb7e36" alt="PT Jaya Kusuma Arum">
+            </div>
+            <div class="emblem-badge">
+                100%
+                <small>Kepuasan Klien</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ STATS ═══════════ -->
+<div class="stats-wrap">
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Tenaga Kerja Profesional</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Perusahaan Klien</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Bidang Layanan Utama</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Dukungan Pelanggan</div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════ TENTANG ═══════════ -->
+<section class="section" id="tentang">
+    <div class="about-grid">
+        <div class="reveal">
+            <div class="main-card">
+                <div class="logo-round">
+                    <img src="https://z-cdn-media.chatglm.cn/files/01c5aad9-d544-461a-850b-5c3368e39099.png?auth_key=1890297576-9557db4ae989468cb3aebe9668febea6-0-a837e2a1098b95caadeeb7864beb7e36" alt="PT Jaya Kusuma Arum">
+                </div>
+                <h3>PT Jaya Kusuma Arum</h3>
+                <p>Professional &bull; Trusted &bull; Reliable</p>
+                <div class="about-badge">
+                    Terpercaya
+                    <small>Sejak Berdiri</small>
+                </div>
+            </div>
+        </div>
+        <div class="about-content reveal">
+            <div class="section-tag">Tentang Kami</div>
+            <h2 class="section-title">Partner SDM Terbaik untuk Bisnis Anda</h2>
+            <p>PT Jaya Kusuma Arum adalah perusahaan penyedia jasa <em>outsourcing</em> yang bergerak di bidang penempatan tenaga keamanan <em>(security)</em>, cleaning service, dan staf administrasi. Kami berkomitmen menghadirkan SDM yang kompeten, disiplin, dan profesional.</p>
+            <p>Dengan sistem rekrutmen yang ketat dan pelatihan berkelanjutan, kami memastikan setiap personel yang ditempatkan di lokasi klien mampu bekerja sesuai standar operasional perusahaan.</p>
+            <ul class="about-list">
+                <li><span class="check-icon">✓</span> Tenaga Terlatih &amp; Bersertifikat</li>
+                <li><span class="check-icon">✓</span> Kontrak Fleksibel</li>
+                <li><span class="check-icon">✓</span> Penggajian &amp; Administrasi Terkelola</li>
+                <li><span class="check-icon">✓</span> Monitoring &amp; Evaluasi Rutin</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ★ LEGALITAS & PROFIL PERUSAHAAN ★
+     ═══════════════════════════════════════════ -->
+<section class="legal-section" id="legalitas">
+    <div class="section">
+        <div class="center" style="margin-bottom:3rem;">
+            <div class="section-tag">Legalitas Resmi</div>
+            <h2 class="section-title">Profil &amp; Legalitas Perusahaan</h2>
+            <p class="section-desc">Badan hukum resmi yang terdaftar dan aktif di Indonesia. Transparansi adalah komitmen kami.</p>
+            <div class="ornament"><span></span><i>◆</i><span></span></div>
+        </div>
+
+        <div class="legal-grid">
+            <!-- Kartu Identitas -->
+            <div class="reveal">
+                <div class="legal-card">
+                    <div class="legal-logo">
+                        <img src="https://z-cdn-media.chatglm.cn/files/01c5aad9-d544-461a-850b-5c3368e39099.png?auth_key=1890297576-9557db4ae989468cb3aebe9668febea6-0-a837e2a1098b95caadeeb7864beb7e36" alt="Logo PT Jaya Kusuma Arum">
+                    </div>
+                    <h3>PT. Jaya Kusuma Arum</h3>
+                    <div class="legal-sub">Perseroan Terbatas</div>
+                    <div class="status-pill">
+                        <span class="status-dot"></span>
+                        Recently Active
+                    </div>
+                    <div class="biz-number">
+                        <small>Business Number</small>
+                        <strong>1110839</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daftar Detail ala iOS Settings -->
+            <div class="reveal">
+                <div class="ios-list">
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">🏢</div>
+                            Registered Name
+                        </div>
+                        <div class="ios-value strong">PT. Jaya Kusuma Arum</div>
+                    </div>
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">#️⃣</div>
+                            Business Number
+                        </div>
+                        <div class="ios-value strong" style="letter-spacing:2px;">1110839</div>
+                    </div>
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">⚖️</div>
+                            Legal Entity Type
+                        </div>
+                        <div class="ios-value">Limited Liability Company</div>
+                    </div>
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">📊</div>
+                            Company Status
+                        </div>
+                        <div class="ios-value">
+                            <span class="status-badge-inline"><span class="status-dot"></span> Recently Active</span>
+                        </div>
+                    </div>
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">🇮🇩</div>
+                            Jurisdiction
+                        </div>
+                        <div class="ios-value strong">Indonesia</div>
+                    </div>
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">📍</div>
+                            Registered Address
+                        </div>
+                        <div class="ios-value">RT.005 RW.002 DS. REJOWINANGUN</div>
+                    </div>
+                    <div class="ios-row">
+                        <div class="ios-label">
+                            <div class="ios-icon">🏙️</div>
+                            City
+                        </div>
+                        <div class="ios-value strong">TRENGGALEK</div>
+                    </div>
+                </div>
+
+                <div class="ios-note">
+                    <i>ℹ️</i>
+                    <span><strong>Company Status:</strong> Active in the last 90 days. Data legalitas ditampilkan sebagaimana terdaftar pada dokumen resmi badan hukum.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ LAYANAN ═══════════ -->
+<section class="services-section" id="layanan">
+    <div class="section center">
+        <div class="section-tag">Layanan Kami</div>
+        <h2 class="section-title">Solusi Ketenagaan Lengkap dalam Satu Pintu</h2>
+        <p class="section-desc">Tiga layanan utama kami dirancang untuk memenuhi kebutuhan operasional perusahaan Anda secara menyeluruh.</p>
+        <div class="ornament"><span></span><i>◆</i><span></span></div>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">🛡️</div>
+                <h3>Keamanan (Security)</h3>
+                <p>Tenaga pengamanan profesional yang terlatih dan bersertifikat untuk menjaga keamanan aset dan lingkungan perusahaan Anda.</p>
+                <ul class="service-list">
+                    <li>Security Satpam Bersertifikat</li>
+                    <li>Patroli &amp; Pengawasan 24 Jam</li>
+                    <li>Pengendalian Akses &amp; Tamu</li>
+                    <li>Penanganan Situasi Darurat</li>
+                    <li>Bodyguard / Pengawal Pribadi</li>
+                    <li>Security Event &amp; Kegiatan Khusus</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">🧹</div>
+                <h3>Cleaning Service</h3>
+                <p>Tenaga kebersihan terlatih dengan standar higienitas tinggi untuk menciptakan lingkungan kerja yang bersih, sehat, dan nyaman.</p>
+                <ul class="service-list">
+                    <li>Office Boy / Office Girl</li>
+                    <li>Housekeeping Gedung &amp; Perkantoran</li>
+                    <li>General Cleaning &amp; Deep Cleaning</li>
+                    <li>Pembersihan Pasca Konstruksi</li>
+                    <li>Gardening &amp; Perawatan Taman</li>
+                    <li>Laundry &amp; Layanan Linen</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">📋</div>
+                <h3>Administrasi (Admin)</h3>
+                <p>Staf administrasi yang cakap dan teliti untuk mendukung kelancaran operasional dan administrasi perusahaan Anda.</p>
+                <ul class="service-list">
+                    <li>Admin Personalia &amp; HRD</li>
+                    <li>Admin Keuangan &amp; Pembukuan</li>
+                    <li>Staff Gudang &amp; Logistik</li>
+                    <li>Resepsionis &amp; Front Office</li>
+                    <li>Data Entry &amp; Operator</li>
+                    <li>Driver &amp; Kurir Perusahaan</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ KEUNGGULAN ═══════════ -->
+<section class="section" id="keunggulan">
+    <div class="center">
+        <div class="section-tag">Kenapa Kami</div>
+        <h2 class="section-title">Keunggulan PT Jaya Kusuma Arum</h2>
+        <p class="section-desc">Alasan mengapa banyak perusahaan mempercayakan kebutuhan SDM-nya kepada kami.</p>
+        <div class="ornament"><span></span><i>◆</i><span></span></div>
+    </div>
+    <div class="why-grid">
+        <div class="why-item reveal">
+            <div class="why-number">01</div>
+            <h3>Rekrutmen Ketat</h3>
+            <p>Seleksi bertahap meliputi tes kesehatan, psikotes, verifikasi latar belakang, dan wawancara mendalam.</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-number">02</div>
+            <h3>Pelatihan Berkelanjutan</h3>
+            <p>Pelatihan dasar dan pengembangan berkala agar kompetensi personel selalu terjaga dan meningkat.</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-number">03</div>
+            <h3>Legalitas Lengkap</h3>
+            <p>Badan hukum resmi terdaftar sesuai regulasi ketenagakerjaan yang berlaku di Indonesia.</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-number">04</div>
+            <h3>Administrasi Teralur</h3>
+            <p>Penggajian, BPJS Kesehatan, BPJS Ketenagakerjaan, dan pajak karyawan dikelola sepenuhnya oleh kami.</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-number">05</div>
+            <h3>Monitoring Rutin</h3>
+            <p>Supervisi dan evaluasi berkala di lokasi untuk memastikan kualitas layanan tetap optimal.</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-number">06</div>
+            <h3>Harga Kompetitif</h3>
+            <p>Paket layanan fleksibel dengan harga transparan tanpa biaya tersembunyi.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ INDUSTRI ═══════════ -->
+<section class="industries">
+    <div class="inner">
+        <div class="section-tag">Sektor yang Kami Layani</div>
+        <h2 class="section-title">Dipercaya Berbagai Sektor Industri</h2>
+        <p class="section-desc">Personel kami telah melayani berbagai jenis industri di seluruh Indonesia.</p>
+        <div class="ornament"><span></span><i>◆</i><span></span></div>
+        <div class="industry-tags">
+            <div class="industry-tag">🏢 Perkantoran</div>
+            <div class="industry-tag">🏭 Pabrik &amp; Manufaktur</div>
+            <div class="industry-tag">🏬 Mall &amp; Ritel</div>
+            <div class="industry-tag">🏨 Hotel &amp; Apartemen</div>
+            <div class="industry-tag">🏥 Rumah Sakit &amp; Klinik</div>
+            <div class="industry-tag">🎓 Sekolah &amp; Kampus</div>
+            <div class="industry-tag">🏦 Bank &amp; Keuangan</div>
+            <div class="industry-tag">🛒 Minimarket &amp; Supermarket</div>
+            <div class="industry-tag">🏗️ Area Konstruksi</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ KONTAK ═══════════ -->
+<section class="section" id="kontak" style="background:var(--cream);">
+    <div class="contact-grid">
+        <div class="reveal">
+            <div class="section-tag">Hubungi Kami</div>
+            <h2 class="section-title">Mari Berkolaborasi</h2>
+            <p class="section-desc" style="margin-bottom:2rem;">Butuh tenaga profesional untuk perusahaan Anda? Hubungi kami untuk konsultasi dan penawaran harga terbaik.</p>
+
+            <div class="contact-info-item">
+                <div class="contact-icon">📍</div>
+                <div>
+                    <h4>Alamat Terdaftar</h4>
+                    <p>RT.005 RW.002 DS. Rejowinangun<br>Kota Trenggalek, Jawa Timur, Indonesia</p>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <div class="contact-icon">📞</div>
+                <div>
+                    <h4>Telepon / WhatsApp</h4>
+                    <p>+62 xxx-xxxx-xxxx</p>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <div class="contact-icon">✉️</div>
+                <div>
+                    <h4>Email</h4>
+                    <p>info@jayakusumaarum.co.id</p>
+                </div>
+            </div>
+            <div class="contact-info-item">
+                <div class="contact-icon">🕒</div>
+                <div>
+                    <h4>Jam Operasional</h4>
+                    <p>Senin – Jumat: 08.00 – 17.00 WIB<br>Sabtu: 08.00 – 14.00 WIB</p>
+                </div>
+            </div>
+        </div>
+
+        <form class="contact-form reveal" onsubmit="return submitForm(event)">
+            <h3>Formulir Permintaan Layanan</h3>
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="perusahaan">Nama Perusahaan</label>
+                <input type="text" id="perusahaan" placeholder="Nama perusahaan Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="layanan">Jenis Layanan</label>
+                <select id="layanan" required>
+                    <option value="">-- Pilih Layanan --</option>
+                    <option>Security / Keamanan</option>
+                    <option>Cleaning Service</option>
+                    <option>Staf Administrasi</option>
+                    <option>Kombinasi Layanan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pesan">Pesan / Kebutuhan</label>
+                <textarea id="pesan" rows="4" placeholder="Ceritakan kebutuhan tenaga kerja Anda..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Kirim Permintaan →</button>
+        </form>
+    </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="footer-logo-chip">
+                <img src="https://z-cdn-media.chatglm.cn/files/01c5aad9-d544-461a-850b-5c3368e39099.png?auth_key=1890297576-9557db4ae989468cb3aebe9668febea6-0-a837e2a1098b95caadeeb7864beb7e36" alt="Logo PT Jaya Kusuma Arum">
+            </div>
+            <h3>PT. Jaya Kusuma Arum</h3>
+            <p>Perusahaan penyedia jasa outsourcing tenaga keamanan, cleaning service, dan administrasi. Badan hukum Perseroan Terbatas (PT) yang terdaftar resmi di Indonesia.</p>
+            <p style="margin-top:0.8rem;font-size:0.82rem;">
+                📍 RT.005 RW.002 DS. Rejowinangun, Trenggalek<br>
+                🇮🇩 Business Number: <strong style="color:var(--gold-light);">1110839</strong>
+            </p>
+        </div>
+        <div>
+            <h4>Navigasi</h4>
+            <ul class="footer-links">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#legalitas">Legalitas</a></li>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Layanan Kami</h4>
+            <ul class="footer-links">
+                <li><a href="#layanan">Security / Satpam</a></li>
+                <li><a href="#layanan">Cleaning Service</a></li>
+                <li><a href="#layanan">Staf Administrasi</a></li>
+                <li><a href="#layanan">Office Boy / Girl</a></li>
+                <li><a href="#layanan">Driver Perusahaan</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2025 <span>PT. Jaya Kusuma Arum</span> — Trenggalek, Indonesia. Seluruh hak cipta dilindungi.
+    </div>
+</footer>
+
+<!-- ═══════════ WHATSAPP ═══════════ -->
+<a href="https://wa.me/62xxxxxxxxxx" target="_blank" class="wa-float" aria-label="Chat WhatsApp">
+    <svg width="29" height="29" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.05-.52-.099-.148-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+    // Menu mobile
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+    }
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navMenu').classList.remove('active');
+        });
+    });
+
+    // Bayangan header saat scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Animasi reveal
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form submit
+    function submitForm(e) {
+        e.preventDefault();
+        alert('Terima kasih! Permintaan Anda telah terkirim.\nTim PT Jaya Kusuma Arum akan segera menghubungi Anda.');
+        e.target.reset();
+        return false;
+    }
+</script>
+
+</body>
+</html>
